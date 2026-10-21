@@ -1,0 +1,720 @@
+/* ==========================================================================
+   Full-Width Dedicated Docs Layout Styles
+   OpenCode Design System, Monospace Typography & Palette (Layout from Image 1)
+   ========================================================================== */
+
+.docs-shell {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base link behavior: NO underlines on UI navigation; only in prose content */
+.docs-shell a {
+  text-decoration: none;
+}
+
+.docs-shell .docs-article a {
+  color: var(--color-text-strong);
+}
+
+.docs-shell .docs-article p a,
+.docs-shell .docs-article li a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.docs-shell .docs-article p a:hover,
+.docs-shell .docs-article li a:hover {
+  color: var(--color-text-strong);
+}
+
+.docs-shell p {
+  line-height: 180%;
+}
+
+/* ==========================================================================
+   1. Navbar (Matching Image 1: Logo + Horizontal Nav Tabs + Search box + GitHub)
+   ========================================================================== */
+.docs-navbar {
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  flex-shrink: 0;
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border-weak);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  z-index: 50;
+}
+
+@media (max-width: 48rem) {
+  .docs-navbar {
+    padding: 0 1rem;
+  }
+}
+
+.docs-navbar a {
+  text-decoration: none;
+}
+
+.docs-navbar img {
+  height: 26px;
+  width: auto;
+  display: block;
+}
+
+.docs-navbar [data-slot="logo dark"] {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .docs-navbar [data-slot="logo light"] {
+    display: none;
+  }
+  .docs-navbar [data-slot="logo dark"] {
+    display: block;
+  }
+}
+
+.dark .docs-navbar [data-slot="logo light"] {
+  display: none;
+}
+
+.dark .docs-navbar [data-slot="logo dark"] {
+  display: block;
+}
+
+/* Horizontal section navigation tabs in header (Docs, CLI, Kits, MCP, API) */
+.docs-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: 28px;
+}
+
+@media (max-width: 58rem) {
+  .docs-nav-tabs {
+    display: none;
+  }
+}
+
+.docs-nav-tab {
+  font-size: 13.5px;
+  font-family: var(--font-mono);
+  color: var(--color-text-weak);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.docs-nav-tab:hover {
+  color: var(--color-text-strong);
+  text-decoration: none;
+}
+
+.docs-nav-tab[data-active="true"] {
+  color: var(--color-text-strong);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Search input trigger button (Matching Image 1 box) */
+.docs-search-input-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px 12px;
+  border: 1px solid var(--color-border-weak);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 12.5px;
+  font-family: var(--font-mono);
+  color: var(--color-text-weak);
+  cursor: pointer;
+  min-width: 130px;
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+
+.docs-search-input-btn:hover {
+  border-color: var(--color-text-weak);
+  color: var(--color-text-strong);
+}
+
+.docs-search-input-btn kbd {
+  font-size: 11px;
+  color: var(--color-text-weak);
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 42rem) {
+  .docs-search-input-btn {
+    min-width: unset;
+    padding: 5px 8px;
+  }
+}
+
+.docs-navbar a.github-nav-link {
+  font-size: 13.5px;
+  font-family: var(--font-mono);
+  color: var(--color-text-strong);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.docs-navbar a.github-nav-link:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   2. Full-Width Body Container (3 Columns: Left Sidebar + Center + Right TOC)
+   ========================================================================== */
+.docs-body {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   3. Left Sidebar (Matching Image 1: Clean, Pure Text, Bold Active, No Underlines)
+   ========================================================================== */
+.docs-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--color-border-weak);
+  height: 100%;
+  overflow-y: auto;
+  padding: 2rem 1.25rem 6rem 2rem;
+  background: var(--color-background);
+  box-sizing: border-box;
+}
+
+@media (max-width: 55rem) {
+  .docs-sidebar {
+    display: none;
+  }
+}
+
+.sidebar-group {
+  margin-bottom: 1.75rem;
+}
+
+.sidebar-group:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-strong);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-list li {
+  margin-bottom: 3px;
+}
+
+.docs-shell .sidebar-link,
+.sidebar-link {
+  all: unset;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 0;
+  font-size: 13.5px;
+  color: var(--color-text-weak);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.docs-shell .sidebar-link:hover,
+.sidebar-link:hover {
+  color: var(--color-text-strong);
+  text-decoration: none;
+}
+
+/* Matching Image 1 active item (e.g. Snapshots): Bold, strong white/text color, no box! */
+.docs-shell .sidebar-link[data-active="true"],
+.sidebar-link[data-active="true"] {
+  color: var(--color-text-strong);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   4. Right Scroll Container (Scrollbar on the FAR RIGHT edge of window)
+   ========================================================================== */
+.docs-content-wrapper {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+.docs-content-inner {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 100%;
+  padding: 3rem 2.5rem 8rem 3.5rem;
+  box-sizing: border-box;
+  gap: 3rem;
+}
+
+@media (max-width: 60rem) {
+  .docs-content-inner {
+    padding: 2rem 1.5rem 6rem 1.5rem;
+    gap: 0;
+  }
+}
+
+.docs-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.docs-article {
+  max-width: 48rem;
+  width: 100%;
+}
+
+.docs-main h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text-strong);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+@media (max-width: 60rem) {
+  .docs-main h1 {
+    font-size: 24px;
+  }
+}
+
+.doc-lead {
+  font-size: 15px;
+  color: var(--color-text);
+  line-height: 180%;
+  margin-bottom: 2.25rem;
+}
+
+/* Subheadings matching Image 1: No horizontal divider lines */
+.docs-main h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-strong);
+  margin: 2.75rem 0 1rem 0;
+  padding-top: 0;
+  border-top: none;
+  scroll-margin-top: 80px;
+}
+
+.docs-main h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+  margin: 1.75rem 0 0.75rem 0;
+  scroll-margin-top: 80px;
+}
+
+.docs-main p {
+  color: var(--color-text);
+  line-height: 180%;
+  margin-bottom: 1.25rem;
+  font-size: 14.5px;
+}
+
+/* Inline code tags matching Image 1 */
+.docs-main code,
+.docs-article code {
+  background: var(--color-background-weak);
+  border: 1px solid var(--color-border-weak);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--color-text-strong);
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   5. Code Panels & Syntax Colors
+   ========================================================================== */
+.doc-panel {
+  background: var(--color-background-weak);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border-weak);
+  font-size: 12px;
+  color: var(--color-text-weak);
+}
+
+.doc-panel pre {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--color-text);
+  white-space: pre-wrap;
+}
+
+/* Subdued syntax highlight tokens */
+.token-keyword {
+  color: #f43f5e;
+}
+.token-string {
+  color: #38bdf8;
+}
+.token-comment {
+  color: #71717a;
+  font-style: italic;
+}
+.token-fn {
+  color: #a78bfa;
+}
+.token-flag {
+  color: #fbbf24;
+}
+
+@media (prefers-color-scheme: light) {
+  .token-keyword {
+    color: #e11d48;
+  }
+  .token-string {
+    color: #0284c7;
+  }
+  .token-comment {
+    color: #71717a;
+  }
+  .token-fn {
+    color: #7c3aed;
+  }
+  .token-flag {
+    color: #b45309;
+  }
+}
+
+/* Copy Status */
+[data-component="copy-status"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+[data-component="copy-status"] [data-slot="copy"] {
+  display: block;
+  width: 15px;
+  height: 15px;
+  color: var(--color-text-weaker);
+}
+
+[data-copied] [data-component="copy-status"] [data-slot="copy"] {
+  display: none;
+}
+
+[data-component="copy-status"] [data-slot="check"] {
+  display: none;
+  width: 15px;
+  height: 15px;
+  color: var(--color-text-strong);
+}
+
+[data-copied] [data-component="copy-status"] [data-slot="check"] {
+  display: block;
+}
+
+/* ==========================================================================
+   6. Right Column: Sticky Table of Contents (Matching Image 2: Sticky Top)
+   ========================================================================== */
+.docs-toc {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 3rem;
+  align-self: flex-start;
+  padding: 0 1rem 4rem 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 78rem) {
+  .docs-toc {
+    display: none;
+  }
+}
+
+/* Subtle, thin scrollbars matching Image 2 trackbar (on far right of screen) */
+.docs-sidebar::-webkit-scrollbar,
+.docs-content-wrapper::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.docs-sidebar::-webkit-scrollbar-track,
+.docs-content-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.docs-sidebar::-webkit-scrollbar-thumb,
+.docs-content-wrapper::-webkit-scrollbar-thumb {
+  background: var(--color-border-weak);
+  border-radius: 3px;
+}
+
+.docs-sidebar::-webkit-scrollbar-thumb:hover,
+.docs-content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-weak);
+}
+
+.toc-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-strong);
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-item {
+  margin-bottom: 8px;
+}
+
+.docs-shell .docs-toc .toc-link,
+.docs-shell .docs-toc a,
+.docs-toc a.toc-link,
+.docs-toc .toc-link {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-weak);
+  text-decoration: none;
+  line-height: 1.4;
+  font-weight: 400;
+  transition: color 0.15s ease;
+}
+
+.docs-shell .docs-toc .toc-link:hover,
+.docs-shell .docs-toc a:hover,
+.docs-toc a.toc-link:hover,
+.docs-toc .toc-link:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.toc-item.h3 .toc-link {
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   7. Tables
+   ========================================================================== */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem 0;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.doc-table th {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border-weak);
+  color: var(--color-text-strong);
+  font-weight: 600;
+  background: var(--color-background-weak);
+}
+
+.doc-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border-weak);
+  color: var(--color-text);
+  vertical-align: top;
+}
+
+.doc-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   9. Method Badges
+   ========================================================================== */
+.method-post {
+  background: var(--color-background-strong);
+  color: var(--color-text-inverted);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.method-get {
+  border: 1px solid var(--color-border-weak);
+  background: var(--color-background-weak);
+  color: var(--color-text-strong);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   10. Footer
+   ========================================================================== */
+.docs-footer-bar {
+  width: 100%;
+  border-top: 1px solid var(--color-border-weak);
+  background: var(--color-background);
+}
+
+/* ==========================================================================
+   11. Search Modal (Cmd + K)
+   ========================================================================== */
+.search-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.search-modal {
+  width: 100%;
+  max-width: 540px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-border-weak);
+  gap: 12px;
+}
+
+.search-input {
+  all: unset;
+  flex: 1;
+  font-size: 14px;
+  color: var(--color-text-strong);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-weak);
+}
+
+.search-results {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.docs-shell .search-result-item,
+.search-result-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.docs-shell .search-result-item:hover,
+.search-result-item:hover,
+.search-result-item[data-selected="true"] {
+  background: var(--color-background-weak);
+  text-decoration: none;
+}
+
+.search-result-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.search-result-cat {
+  font-size: 11px;
+  color: var(--color-text-weak);
+  margin-top: 2px;
+}
+
+.search-empty {
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-weak);
+}
